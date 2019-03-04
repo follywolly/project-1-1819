@@ -1,1 +1,21 @@
 
+#scanner__modal {
+  display: none;
+  background-color: red;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: "";
+}
+#scanner__modal .scanner__modal-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+#scanner__modal.active {
+  display: block;
+}
