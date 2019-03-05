@@ -4,12 +4,18 @@ class ScannerOutput extends Component {
   constructor(props){
     super(props)
     this.state = {
-      barcode: 'Scan a bar code to see ISBN number'
+      barcode: ''
     }
   }
   build(){
     const v = this.domHandler.virtualize
-    return v('div', {'id': 'scanner__output'}, this.state.barcode)
+
+    if (!this.state.barcode) {
+      return v('div', {'id': 'scanner__output'})
+    }
+    return v('div', {'id': 'scanner__output'},
+      v('p', {}, `ISBN Number: ${this.state.barcode}`)
+    )
   }
   mounted() {
     this.store.watch('barcode', (val) => {

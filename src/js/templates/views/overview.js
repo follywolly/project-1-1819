@@ -1,6 +1,5 @@
 import Component from '../component.js'
-import ScannerOutput from '../components/scanner-output.js'
-import ScannerModal from '../components/scanner-modal.js'
+import Scanner from '../components/scanner.js'
 import Book from '../components/book.js'
 
 class Overview extends Component {
@@ -10,14 +9,7 @@ class Overview extends Component {
   build(){
     const v = this.domHandler.virtualize
     return v('div', {'class': 'container'},
-      v('h1', {}, 'Scanner'),
-      v('div', {'class': 'scanner'},
-        v('button', {'class': 'scanner__modal-toggle'}, 'scan barcode'),
-        v('div', {'class': 'scanner__output-holder'},
-          v(ScannerOutput)
-        ),
-        v(ScannerModal)
-      ),
+      v(Scanner),
       v('div', {'class': 'book-holder'},
         v(Book)
       ),

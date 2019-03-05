@@ -11,15 +11,21 @@ class Component {
     this.state = {}
     this.id = this.store.unId
     this.store.commit('updateID') // increment unique id for every instance of components
-    this.loading = false // default no loading state
+    this.isLoading = false // default no loading state
   }
   setState(state) {
     this.state = Object.assign({}, this.state, state)
     this.domHandler.update(this) // update the component when state changes
   }
+  loading(bool) {
+    this.isLoading = bool
+    if (bool === true) {
+      this.domHandler.update(this)
+    }
+  }
   preBuild() {
     let node
-    if (this.loading) {
+    if (this.isLoading) {
       node = this.loader() // loading state
     } else {
       node = this.build() // default state

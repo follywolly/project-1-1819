@@ -1,4 +1,5 @@
 import Component from './templates/component.js'
+import Header from './templates/components/header.js'
 
 class App extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class App extends Component {
   build() {
     const v = this.domHandler.virtualize
     return v('div', {'class': 'app'},
+      v(Header),
       v('div', {'id': 'router-view'}) // every route renders in router-view element
     )
   }

@@ -10,7 +10,6 @@ class ScannerModal extends Component {
   build(){
     const v = this.domHandler.virtualize
     return v('div', {'id': 'scanner__modal'},
-      v('button', {'class': 'scanner__modal-toggle'}, 'close scanner'),
       v('div', {'id': 'interactive', 'class': 'viewport'}),
       v('div', {'class': 'error'})
     )
@@ -25,8 +24,10 @@ class ScannerModal extends Component {
     Quagga.onDetected(result => {
     	if (result.codeResult.code){
         Quagga.stop()
-    		this.store.setState({barcode: result.codeResult.code})
-    		setTimeout(() => { this.container.classList.remove('active') }, 1000)
+    		setTimeout(() => {
+          this.container.classList.remove('active')
+          this.store.setState({barcode: result.codeResult.code})
+        }, 0)
     	}
     })
 
