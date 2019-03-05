@@ -1,5 +1,7 @@
 import Component from '../component.js'
-import { liveStreamConfig } from '../../plugins/quaggaHandler.js'
+import ScannerOutput from '../components/scanner-output.js'
+import ScannerModal from '../components/scanner-modal.js'
+import Book from '../components/book.js'
 
 class Overview extends Component {
   constructor(props){
@@ -7,48 +9,19 @@ class Overview extends Component {
   }
   build(){
     const v = this.domHandler.virtualize
-    return v('div', {},
+    return v('div', {'class': 'container'},
       v('h1', {}, 'Scanner'),
-      v('div', {'class': 'scanner-holder'},
+      v('div', {'class': 'scanner'},
         v('button', {'class': 'scanner__modal-toggle'}, 'scan barcode'),
-        v('div', {'id': 'scanner__output'}, this.store.state.barcode),
-        v('div', {'id': 'scanner__modal'},
-          v('button', {'class': 'scanner__modal-toggle'}, 'close scanner'),
-          v('div', {'id': 'interactive', 'class': 'viewport'}),
-          v('div', {'class': 'error'})
-        )
-      )
-    )
-  }
-  mounted() {
-    this.toggleModal()
-  }
-  toggleModal(){
-    const toggles = document.querySelectorAll('.scanner__modal-toggle')
-    const modal = document.querySelector('#scanner__modal')
-    toggles.forEach(toggle => toggle.addEventListener(
-      'click',
-      () => {
-        modal.classList.toggle('active')
-
-        if (modal.classList.contains('active')) {
-          Quagga.init(
-        		liveStreamConfig,
-        		(err) => {
-        			if (err) {
-                console.log(err)
-        				Quagga.stop()
-        				return
-        			}
-        			Quagga.start()
-        		}
-        	)
-        } else {
-          if (Quagga){
-        		Quagga.stop()
-        	}
-        }
-      })
+        v('div', {'class': 'scanner__output-holder'},
+          v(ScannerOutput)
+        ),
+        v(ScannerModal)
+      ),
+      v('div', {'class': 'book-holder'},
+        v(Book)
+      ),
+      v('p', {'id': 'error'})
     )
   }
 }

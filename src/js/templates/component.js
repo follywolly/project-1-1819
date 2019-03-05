@@ -1,6 +1,6 @@
 import DOM from '../virtual/dom.js'
 import Helper from '../virtual/helper.js'
-import store from '../plugins/store.js'
+import store from '../store.js'
 
 class Component {
   constructor(props){
