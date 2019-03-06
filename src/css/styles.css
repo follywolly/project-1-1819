@@ -61,6 +61,7 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 1260px;
   width: 92%;
   margin: 0 auto;
+  position: relative;
 }
 .center {
   margin-left: auto;
@@ -157,7 +158,9 @@ p.center {
   object-fit: cover;
 }
 #error {
+  width: 100%;
   color: red;
+  overflow-x: scroll
 }
 
 canvas.drawing, canvas.drawingBuffer {
@@ -168,7 +171,7 @@ canvas.drawing, canvas.drawingBuffer {
 
 .list {
   list-style-type: none;
-  padding: 0;
+  padding: 2rem 0 0;
 }
 .list .book {
   padding: 0;
@@ -184,6 +187,35 @@ canvas.drawing, canvas.drawingBuffer {
   opacity: 1;
   transform: translateX(-100vw);
   max-height: 0;
+  margin: 0;
+}
+#generate-apa-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#apa-output {
+  position: fixed;
+  top: 5vh;
+  left: 5vw;
+  overflow: hidden;
+  overflow-y: scroll;
+  min-height: 90vh;
+  max-width: 90vh;
+  min-width: 90vw;
+  max-width: 90vw;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s;
+  background-color: var(--color-secondary);
+  padding: 3rem 1rem 1rem;
+  box-shadow: 0px 0px 0px 5vmax rgba(0,0,0,0.5);
+}
+#apa-output.show {
+  pointer-events: all;
+  z-index: 3;
+  opacity: 1;
 }
 .book {
   border-radius: 4px;
@@ -193,7 +225,7 @@ canvas.drawing, canvas.drawingBuffer {
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
-.book__list-btn {
+.micro-action-btn {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;

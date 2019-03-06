@@ -5,7 +5,7 @@
 import Router from './virtual/router.js'
 
 import Overview from './templates/views/overview.js'
-import List from './templates/views/list.js'
+import MyList from './templates/views/mylist.js'
 
 console.log('linked');
 
@@ -20,7 +20,7 @@ router.add(
     },
     {
       href: '/my-list',
-      temp: () => new List,
+      temp: () => new MyList,
       callback: () => console.log('callback')
     }
   ]

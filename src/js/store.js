@@ -7,7 +7,7 @@ const store = new Store()
 store.setState({
   barcode: null,
   book: null,
-  list: [{title: 'Book 1', img: 'https://unsplash.it/400/400'}, {title: 'Book 2', img: 'https://unsplash.it/400/400'}],
+  list: [{title: 'Book 1', img: 'https://unsplash.it/400/400', publication: {}, authors: ['Nebeker, F']}, {title: 'Book 2', img: 'https://unsplash.it/400/400', authors: [], publication: {}}],
   modal: {
     show: false,
     msg: ''

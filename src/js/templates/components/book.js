@@ -16,7 +16,7 @@ class Book extends Component {
     }
     return v('div', {'class': 'book'},
       v('div', {'class': 'book__content-holder'},
-        v('button', {'class': 'book__list-btn btn', 'id': 'add-button'}, '+'),
+        v('button', {'class': 'book__list-btn micro-action-btn btn', 'id': 'add-button'}, '+'),
         v('h3', {'class': 'book__title'}, this.state.book.title),
         v('figure', {'class': 'book__figure'},
           v('img', {'src': this.state.book.img})
@@ -54,9 +54,15 @@ class Book extends Component {
     if (!button) return
     button.addEventListener('click', () => {
       const list = this.store.getState('list')
-      list.push(this.state.book)
-      this.store.setState({list})
-      this.store.setState({modal: {show: true, msg: 'Added book to list'}})
+      const book = this.state.book
+      const index = list.findIndex(obj => obj.title === book.title && obj.authors[0] === book.authors[0])
+      if (index > -1) {
+        this.store.setState({modal: {show: true, msg: 'This book is already on your list!'}})
+      } else {
+        list.push(this.state.book)
+        this.store.setState({list})
+        this.store.setState({modal: {show: true, msg: 'Added book to list'}})
+      }
     })
   }
   error(err){
@@ -68,7 +74,9 @@ class Book extends Component {
 
     try {
       // request
-      const book = await this.data.getSingle(isbn)
+      const obj = await this.data.getSingle(isbn)
+      this.error(JSON.stringify(obj, null, 2))
+      const book = {...obj, data: ''}
       this.loading(false)
       this.store.setState({book})
       this.setState({book})

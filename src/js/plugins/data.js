@@ -11,12 +11,33 @@ const noNull = obj => {
   return obj
 }
 
+const formatAuthor = author => {
+  let text = author._text
+  const formatted = text.split(',')
+  if (formatted.length === 1) {
+    //niet geformatteerd
+    const names = text.split(' ')
+    if (names.length === 2) {
+      return `${names[1]}, ${names[0].charAt(0)}`
+    }
+  } else if (formatted.length === 2) {
+    return `${formatted[0]}, ${formatted[1].trim().charAt(0)}`
+  }
+  return author._text
+}
+
 const singleTemp = book => {
   const temp = {
     img: book.coverimages.coverimage[0]._text,
-    title: book.titles.title._text,
+    title: book.titles['short-title'] ? book.titles['short-title']._text : book.titles.title._text,
+    authors: book.authors.author ? [book.authors['main-author']._text, ...book.authors.author.map(formatAuthor)] : [book.authors['main-author']._text],
+    publication: {
+      year: book.publication.year ? book.publication.year._text : '',
+      publisher: book.publication.publishers ? book.publication.publishers.publisher._text : '',
+      place: book.publication.publishers ? book.publication.publishers.publisher._attributes.place : ''
+    },
     subjects: book.subjects['topical-subject'].map(subject => subject['_text']),
-    // data: book
+    data: book
   }
   temp.subjects = temp.subjects ? temp.subjects : []
   return noNull(temp)
