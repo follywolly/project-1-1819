@@ -19,7 +19,8 @@ class APAGenerator extends Component {
         v('div', {'id': 'apa-output', 'class': 'apa-generator__output'})
       )
     }
-    const apastr = this.state.apaList.map(book => `${book}%0D%0A %0D%0A`).join('')
+    let apastr = this.state.apaList.map(book => `${book}%0D%0A %0D%0A`).join('')
+    apastr = apastr.replace(/&/g, '%26')
     return v('div', {'class': 'apa-generator'},
       v('button', {'id': 'generate-apa-btn', 'class': 'apa-generator__btn btn'}, 'Generate APA'),
       v('div', {'id': 'apa-output', 'class': 'apa-generator__output'},
