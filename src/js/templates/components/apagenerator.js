@@ -19,12 +19,18 @@ class APAGenerator extends Component {
         v('div', {'id': 'apa-output', 'class': 'apa-generator__output'})
       )
     }
+    const apastr = this.state.apaList.map(book => `${book}%0D%0A %0D%0A`).join('')
     return v('div', {'class': 'apa-generator'},
       v('button', {'id': 'generate-apa-btn', 'class': 'apa-generator__btn btn'}, 'Generate APA'),
       v('div', {'id': 'apa-output', 'class': 'apa-generator__output'},
         v('button', {'id': 'apa-output__close-btn', 'class': 'btn micro-action-btn'}, 'x'),
-        ...this.state.apaList.map(book =>
-          v('p', {}, book)
+        v('div', {'class': 'apa-generator__list'},
+          ...this.state.apaList.map(book =>
+            v('p', {}, book)
+          )
+        ),
+        v('div', {'class': 'mail'},
+          v('a', {'class': 'mail-btn btn', 'href': `mailto:?subject=OBA APA style list&body=${apastr}%0D%0A`}, 'Send list to mymail')
         )
       )
     )
@@ -52,7 +58,7 @@ class APAGenerator extends Component {
       })
     }
     apaBtn.addEventListener('click', () => {
-      const apaList = this.state.list.map(book => this.helper.genAPA(book))
+      const apaList = this.state.list.map(book => this.helper.genAPA(book)).sort()
       this.setState({apaList})
     })
 
