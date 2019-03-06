@@ -12,11 +12,11 @@ class Book extends Component {
   build(){
     const v = this.domHandler.virtualize
     if (!this.state.book) {
-      return v('div', {'class': 'book placeholder'}, 'no book')
+      return v('div', {'class': 'book placeholder'})
     }
     return v('div', {'class': 'book'},
       v('div', {'class': 'book__content-holder'},
-        v('button', {'class': 'book__add-to-list btn', 'id': 'add-button'}, 'Add'),
+        v('button', {'class': 'book__list-btn btn', 'id': 'add-button'}, '+'),
         v('h3', {'class': 'book__title'}, this.state.book.title),
         v('figure', {'class': 'book__figure'},
           v('img', {'src': this.state.book.img})
@@ -56,15 +56,15 @@ class Book extends Component {
       const list = this.store.getState('list')
       list.push(this.state.book)
       this.store.setState({list})
-      const local = localStorage.getItem('list')
-      const text = local ? `local: ${local}` : 'no local'
-      this.error(text)
+      this.store.setState({modal: {show: true, msg: 'Added book to list'}})
     })
   }
-  error(err){ document.querySelector('#error').innerText = err }
+  error(err){
+    document.querySelector('#error').innerText = err
+  }
   async loadBook(isbn) {
     this.loading(true)
-    // this.error('')
+    this.error('')
 
     try {
       // request

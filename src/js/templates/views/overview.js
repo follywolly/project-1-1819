@@ -1,6 +1,7 @@
 import Component from '../component.js'
 import Scanner from '../components/scanner.js'
 import Book from '../components/book.js'
+import Popup from '../components/popup.js'
 
 class Overview extends Component {
   constructor(props){
@@ -13,7 +14,10 @@ class Overview extends Component {
       v('div', {'class': 'book-holder'},
         v(Book)
       ),
-      v('p', {'id': 'error'})
+      v('p', {'id': 'error'}),
+      v('div', {},
+        v(Popup)
+      )
     )
   }
 }

@@ -9,7 +9,7 @@ class App extends Component {
     const v = this.domHandler.virtualize
     return v('div', {'class': 'app'},
       v(Header),
-      v('div', {'id': 'router-view'}) // every route renders in router-view element
+      v('main', {'id': 'router-view', 'class': 'main'}) // every route renders in router-view element
     )
   }
 }

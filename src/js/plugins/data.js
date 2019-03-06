@@ -16,7 +16,7 @@ const singleTemp = book => {
     img: book.coverimages.coverimage[0]._text,
     title: book.titles.title._text,
     subjects: book.subjects['topical-subject'].map(subject => subject['_text']),
-    data: book
+    // data: book
   }
   temp.subjects = temp.subjects ? temp.subjects : []
   return noNull(temp)

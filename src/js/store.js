@@ -7,7 +7,11 @@ const store = new Store()
 store.setState({
   barcode: null,
   book: null,
-  list: []
+  list: [{title: 'Book 1', img: 'https://unsplash.it/400/400'}, {title: 'Book 2', img: 'https://unsplash.it/400/400'}],
+  modal: {
+    show: false,
+    msg: ''
+  }
 })
 
 if (localStorage.getItem('list')) {
@@ -15,13 +19,9 @@ if (localStorage.getItem('list')) {
   store.setState({list})
 }
 
-store.watch('list', () => {
+store.watch('list', (val) => {
   localStorage.setItem('list', JSON.stringify(val))
-  const error = document.querySelector('#error')
-  if (error) {
-    const local = localStorage.getItem('list')
-    error.innerText = local ? 'true, ' + local : 'false'
-  }
-}, null)
+  const local = localStorage.getItem('list')
+}, 0)
 
 export default store

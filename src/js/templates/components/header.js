@@ -7,17 +7,19 @@ class Header extends Component {
   build(){
     const v = this.domHandler.virtualize
     return v('header', {'class': 'header'},
+      v('a', {'href': '#/', 'class': 'main-navigation__link'},
+        v('h1', {'class': 'header__title'}, 'OBA-APA')
+      ),
       v('nav', {'class': 'main-navigation'},
-        v('ul', {},
-          v('li', {},
-            v('a', {'href': '#/'}, 'home')
-          ),
-          v('li', {},
-            v('a', {'href': '#/my-list'}, 'my list')
+        v('ul', {'class': 'main-navigation__list'},
+          // v('li', {'class': 'main-navigation__list-item'},
+          //   v('a', {'href': '#/', 'class': 'main-navigation__link'}, 'home')
+          // ),
+          v('li', {'class': 'main-navigation__list-item'},
+            v('a', {'href': '#/my-list', 'class': 'main-navigation__link'}, 'my list')
           )
         )
-      ),
-      v('h1', {}, 'OBAmeta')
+      )
     )
   }
 }
