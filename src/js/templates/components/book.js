@@ -75,7 +75,6 @@ class Book extends Component {
     try {
       // request
       const obj = await this.data.getSingle(isbn)
-      this.error(JSON.stringify(obj, null, 2))
       const book = {...obj, data: ''}
       this.loading(false)
       this.store.setState({book})
