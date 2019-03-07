@@ -5,7 +5,7 @@ class Book extends Component {
   constructor(props){
     super(props)
     this.state = {
-      book: this.store.getState('book'),
+      book: this.store.getState('book'), // {title: 'book 1', subjects: [], img: 'https://unsplash.it/400/400', authors: ['Some, N']}, 
       error: false
     }
     this.data = data

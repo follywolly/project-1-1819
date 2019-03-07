@@ -131,6 +131,11 @@ p.center {
 p a {
   color: var(--color-primary);
 }
+.small {
+  opacity: 0.5;
+  font-size: 0.625rem;
+  margin: 2rem 0;
+}
 .btn {
   text-transform: lowercase;
   display: table;
@@ -168,6 +173,7 @@ p a {
   min-height: 2rem;
   text-align: center;
   transition: all 0.3s;
+  z-index: 3;
 }
 #modal p {
   margin: 0;

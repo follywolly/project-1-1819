@@ -4,6 +4,7 @@
 
 ## Summary
 A tool for students working on research papers or their thesis who want to easily generate a reference list (currently APA-style) from books within the [OBA](https://oba.nl).
+Application build with a virtual DOM component system, explored in one of my repo's, [web app from scratch](https://github.com/follywolly/web-app-from-scratch-18-19).
 
 ## Table of contents
 1. [Live demo](#1-Live-demo)
@@ -50,6 +51,7 @@ t.b.a
 ## Sources
 - [OBA-wrapper](https://github.com/maanlamp/OBA-wrapper) by [maanlamp](https://github.com/maanlamp)
 - [OBA Api](https://zoeken.oba.nl/?uilang=en)
+- Homepage machine background image designed by [Freepik](https://freepik.com)
 
 ## License
 [MIT](LICENSE) @ [Folkert-Jan van der Pol](https://folkertjan.nl)

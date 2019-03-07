@@ -16,6 +16,10 @@ class Overview extends Component {
       ),
       v('div', {},
         v(Popup)
+      ),
+      v('p', {'class': 'small center'},
+        'Machine background image design by ',
+        v('a', {'href': 'http://www.freepik.com'}, 'Freepik')
       )
     )
   }
