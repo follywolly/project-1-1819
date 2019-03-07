@@ -5,7 +5,7 @@ class Book extends Component {
   constructor(props){
     super(props)
     this.state = {
-      book: this.store.getState('book'), // {title: 'book 1', subjects: [], img: 'https://unsplash.it/400/400', authors: ['Some, N']}, 
+      book: this.store.getState('book'), // {title: 'book 1', subjects: [], img: 'https://unsplash.it/400/400', authors: ['Some, N']},
       error: false
     }
     this.data = data
@@ -83,8 +83,7 @@ class Book extends Component {
 
     try {
       // request
-      const obj = await this.data.getSingle(isbn)
-      const book = {...obj, data: ''}
+      const book = await this.data.getSingle(isbn)
       this.loading(false)
       this.store.setState({book})
       this.setState({book})

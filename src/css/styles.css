@@ -329,6 +329,7 @@ canvas.drawing, canvas.drawingBuffer {
 }
 .list-container {
   padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 .list {
   list-style-type: none;

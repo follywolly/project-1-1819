@@ -28,16 +28,33 @@ const formatAuthor = author => {
 
 const singleTemp = book => {
   const temp = {
-    img: book.coverimages.coverimage[0]._text,
-    title: book.titles['short-title'] ? book.titles['short-title']._text : book.titles.title._text,
-    authors: book.authors.author.length > 0 ? [book.authors['main-author']._text, ...book.authors.author.map(formatAuthor)] : [book.authors['main-author']._text],
-    publication: {
-      year: book.publication.year ? book.publication.year._text : '',
-      publisher: book.publication.publishers ? book.publication.publishers.publisher._text : '',
-      place: book.publication.publishers ? book.publication.publishers.publisher._attributes.place : ''
-    },
-    subjects: book.subjects['topical-subject'].map(subject => subject['_text']),
-    data: book
+    img: book.coverimages
+      ? book.coverimages.coverimage[0]._text
+      : '',
+    title: book.titles
+      ? (book.titles['short-title']
+        ? book.titles['short-title']._text
+        : book.titles.title._text)
+      : '',
+    authors: book.authors.author
+      ? (book.authors.author.length > 0
+        ? [book.authors['main-author']._text, ...book.authors.author.map(formatAuthor)]
+        : [book.authors['main-author']._text])
+      : '',
+    publication: book.publication
+     ? {
+        year: book.publication.year ? book.publication.year._text : '',
+        publisher: book.publication.publishers ? book.publication.publishers.publisher._text : '',
+        place: book.publication.publishers ? book.publication.publishers.publisher._attributes.place.replace(/[^a-zA-Z0-9\-]/g,'') : ''
+      }
+    : {year: '', publisher: '', place: ''},
+    subjects: book.subjects
+    ? (book.subjects['topical-subject']
+      ? (book.subjects['topical-subject'].length > 0
+        ? book.subjects['topical-subject'].map(subject => subject._text)
+        : [book.subjects['topical-subject']._text])
+      : [])
+    : []
   }
   temp.subjects = temp.subjects ? temp.subjects : []
   return noNull(temp)
