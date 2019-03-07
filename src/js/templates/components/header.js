@@ -7,8 +7,9 @@ class Header extends Component {
   build(){
     const v = this.domHandler.virtualize
     return v('header', {'class': 'header'},
-      v('a', {'href': '#/', 'class': 'main-navigation__link'},
-        v('h1', {'class': 'header__title'}, 'OBA-APA')
+      v('a', {'href': '#/', 'class': 'main-navigation__link home-link'},
+        v('img', {'src': './images/oba_logo.svg', 'class': 'header__logo'}),
+        v('h1', {'class': 'header__title'}, 'sourceror')
       ),
       v('nav', {'class': 'main-navigation'},
         v('ul', {'class': 'main-navigation__list'},
@@ -16,7 +17,7 @@ class Header extends Component {
           //   v('a', {'href': '#/', 'class': 'main-navigation__link'}, 'home')
           // ),
           v('li', {'class': 'main-navigation__list-item'},
-            v('a', {'href': '#/my-list', 'class': 'main-navigation__link'}, 'my list')
+            v('a', {'href': '#/my-list', 'class': 'main-navigation__link barcode'}, 'my list')
           )
         )
       )

@@ -30,7 +30,7 @@ const singleTemp = book => {
   const temp = {
     img: book.coverimages.coverimage[0]._text,
     title: book.titles['short-title'] ? book.titles['short-title']._text : book.titles.title._text,
-    authors: book.authors.author ? [book.authors['main-author']._text, ...book.authors.author.map(formatAuthor)] : [book.authors['main-author']._text],
+    authors: book.authors.author.length > 0 ? [book.authors['main-author']._text, ...book.authors.author.map(formatAuthor)] : [book.authors['main-author']._text],
     publication: {
       year: book.publication.year ? book.publication.year._text : '',
       publisher: book.publication.publishers ? book.publication.publishers.publisher._text : '',

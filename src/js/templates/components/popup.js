@@ -6,7 +6,8 @@ class Popup extends Component {
     const modal = this.store.getState('modal')
     this.state = {
       msg: modal.msg,
-      show: modal.show
+      show: modal.show,
+      error: modal.error
     }
   }
   build(){
@@ -14,6 +15,11 @@ class Popup extends Component {
 
     if (!this.state.show) {
       return v('div', {'id': 'modal'})
+    }
+    if (this.state.error) {
+      return v('div', {'id': 'modal', 'class': 'error'},
+        v('p', {}, this.state.msg)
+      )
     }
     return v('div', {'id': 'modal'},
       v('p', {}, this.state.msg)
@@ -32,7 +38,7 @@ class Popup extends Component {
             modal.classList.remove('show')
           }, 1500)
         } else {
-          this.store.setState({modal: {show: false, msg: ''}})
+          this.store.setState({modal: {show: false, msg: '', error: false}})
         }
       })
     }

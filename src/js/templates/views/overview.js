@@ -14,7 +14,6 @@ class Overview extends Component {
       v('div', {'class': 'book-holder'},
         v(Book)
       ),
-      v('p', {'id': 'error'}),
       v('div', {},
         v(Popup)
       )

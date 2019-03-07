@@ -5,14 +5,26 @@ class Book extends Component {
   constructor(props){
     super(props)
     this.state = {
-      book: this.store.getState('book')
+      book: this.store.getState('book'),
+      error: false
     }
     this.data = data
   }
   build(){
     const v = this.domHandler.virtualize
+    if (this.state.error) {
+      return v('div', {'class': 'book placeholder'},
+        v('p', {'id': 'error', 'class': 'center'}, `${this.state.error}`)
+      )
+    }
     if (!this.state.book) {
-      return v('div', {'class': 'book placeholder'})
+      return v('div', {'class': 'book placeholder'},
+        v('h2', {'class': 'overview-title center'},
+        v('img', {'src': './images/oba_logo.svg'}),
+        'sourceror'),
+        v('p', {'class': 'center'}, 'Welcome to the OBA source reference list generator.'),
+        v('p', {'class': 'center'}, 'Get started by scanning a book!')
+      )
     }
     return v('div', {'class': 'book'},
       v('div', {'class': 'book__content-holder'},
@@ -65,12 +77,9 @@ class Book extends Component {
       }
     })
   }
-  error(err){
-    document.querySelector('#error').innerText = err
-  }
   async loadBook(isbn) {
     this.loading(true)
-    this.error('')
+    this.setState({error: false})
 
     try {
       // request
@@ -81,7 +90,7 @@ class Book extends Component {
       this.setState({book})
     } catch (e) {
       this.loading(false)
-      this.error(e)
+      this.setState({error: e})
     }
   }
 }

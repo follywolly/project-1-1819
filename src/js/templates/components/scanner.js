@@ -9,7 +9,7 @@ class Scanner extends Component {
   build(){
     const v = this.domHandler.virtualize
     return v('div', {'class': 'scanner'},
-      v('button', {'class': 'scanner__modal-toggle btn center', 'id': 'scanner-toggle'}, 'scan barcode'),
+      v('button', {'class': 'scanner__modal-toggle btn center barcode', 'id': 'scanner-toggle'}, 'scan barcode'),
       v(ScannerModal),
       v('div', {'class': 'scanner__output-holder'},
         v(ScannerOutput)

@@ -10,7 +10,10 @@ class List extends Component {
   build(){
     const v = this.domHandler.virtualize
     if (this.state.list.length === 0) {
-      return v('p', {'class': 'list'}, 'You don\'t have any books in your list yet.')
+      return v('p', {'class': 'list'},
+        'You don\'t have any books in your list yet. Try adding one by ',
+        v('a', {'href': '#/'}, 'scanning a book and pressing the add sign.')
+      )
     }
     return v('ul', {'class': 'list'},
       ...this.state.list.map(item => v('li', {'class': 'list__item book'},

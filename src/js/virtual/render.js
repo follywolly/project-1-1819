@@ -8,7 +8,7 @@ class Render {
     this.errorTemp = new ErrorTemp()
 
     this.app = {
-      el: document.querySelector('#app'),
+      el: document.querySelector('#root'),
       temp: new App()
     }
 

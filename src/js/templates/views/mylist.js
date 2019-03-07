@@ -8,7 +8,7 @@ class MyList extends Component {
   }
   build(){
     const v = this.domHandler.virtualize
-    return v('div', {'class': 'container'},
+    return v('div', {'class': 'container list-container'},
       v('h2', {}, 'List'),
       v('div', {},
         v(APAGenerator)

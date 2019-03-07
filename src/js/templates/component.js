@@ -18,6 +18,10 @@ class Component {
     this.domHandler.update(this) // update the component when state changes
   }
   loading(bool) {
+    if (bool === 'previous') {
+      this.isLoading = false
+      return this.domHandler.update(this)
+    }
     this.isLoading = bool
     if (bool === true) {
       this.domHandler.update(this)
