@@ -1,5 +1,4 @@
-class Helper {
-  constructor() {}
+const helper = {
   chunk(array, size = 3) {
     let length = array == null ? 0 : array.length;
     if (!length) {
@@ -14,15 +13,16 @@ class Helper {
       index += size // reset index naar het eind van de vorige gemaakte chunk
     }
     return result
-  }
+  },
   genAPA(book) {
     // author, a. a., & author, a. b., & author, b. a. (pubYear). Title. City, State: publisher.
     let str = ``
 
     // authors
-    if (book.authors.length > 0) {
-      book.authors.forEach((author, i) => {
-        if (i === book.authors.length - 1) {
+    if (book.authors.length > 1 || (book.authors.length === 1 && book.authors[0] !== '')) {
+      const authors = book.authors.filter(author => author !== '')
+      authors.forEach((author, i) => {
+        if (i === authors.length - 1) {
           str += `${author}. `
         } else {
           str += `${author}, & `
@@ -55,6 +55,26 @@ class Helper {
     }
 
     return str.trim()
+  },
+  noNull(obj) {
+    for (const [key, val] of Object.entries(obj)) {
+      obj[key] = !val ? '' : val
+    }
+    return obj
+  },
+  formatAuthor(author) {
+    let text = author._text ? author._text : author
+    const formatted = text.split(',')
+    if (formatted.length === 1) {
+      //niet geformatteerd
+      const names = text.split(' ')
+      if (names.length === 2) {
+        return `${names[1]}, ${names[0].charAt(0)}`
+      }
+    } else if (formatted.length === 2) {
+      return `${formatted[0]}, ${formatted[1].trim().charAt(0)}`
+    }
+    return author._text
   }
 }
-export default Helper
+export default helper

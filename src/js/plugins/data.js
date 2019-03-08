@@ -1,30 +1,9 @@
 import { API } from './obawrapper/index.js'
+import helper from '../virtual/helper.js'
 
 const api = new API({
     key: '1e19898c87464e239192c8bfe422f280'
 })
-
-const noNull = obj => {
-  for (const [key, val] of Object.entries(obj)) {
-    obj[key] = !val ? '' : val
-  }
-  return obj
-}
-
-const formatAuthor = author => {
-  let text = author._text
-  const formatted = text.split(',')
-  if (formatted.length === 1) {
-    //niet geformatteerd
-    const names = text.split(' ')
-    if (names.length === 2) {
-      return `${names[1]}, ${names[0].charAt(0)}`
-    }
-  } else if (formatted.length === 2) {
-    return `${formatted[0]}, ${formatted[1].trim().charAt(0)}`
-  }
-  return author._text
-}
 
 const singleTemp = book => {
   const temp = {
@@ -38,14 +17,14 @@ const singleTemp = book => {
       : '',
     authors: book.authors.author
       ? (book.authors.author.length > 0
-        ? [book.authors['main-author']._text, ...book.authors.author.map(formatAuthor)]
+        ? [book.authors['main-author']._text, ...book.authors.author.map(helper.formatAuthor)]
         : [book.authors['main-author']._text])
-      : '',
+      : [],
     publication: book.publication
      ? {
         year: book.publication.year ? book.publication.year._text : '',
         publisher: book.publication.publishers ? book.publication.publishers.publisher._text : '',
-        place: book.publication.publishers ? book.publication.publishers.publisher._attributes.place.replace(/[^a-zA-Z0-9\-]/g,'') : ''
+        place: book.publication.publishers ? book.publication.publishers.publisher._attributes.place.replace(/[^a-zA-Z0-9\-\,\s]/g,'') : ''
       }
     : {year: '', publisher: '', place: ''},
     subjects: book.subjects
@@ -57,7 +36,7 @@ const singleTemp = book => {
     : []
   }
   temp.subjects = temp.subjects ? temp.subjects : []
-  return noNull(temp)
+  return helper.noNull(temp)
 }
 
 const data = {

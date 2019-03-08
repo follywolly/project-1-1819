@@ -1,11 +1,11 @@
 import DOM from '../virtual/dom.js'
-import Helper from '../virtual/helper.js'
+import helper from '../virtual/helper.js'
 import store from '../store.js'
 
 class Component {
   constructor(props){
     this.domHandler = new DOM()
-    this.helper = new Helper()
+    this.helper = helper
     this.store = store
     this.props = props
     this.state = {}

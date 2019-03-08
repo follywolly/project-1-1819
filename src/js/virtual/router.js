@@ -3,6 +3,7 @@ import Render from './render.js'
 class Router {
   constructor(){
     this.routes = []
+    this.cbs = []
     this.render = new Render()
 
     if (!window.location.hash) window.location.href = '#/'
@@ -10,6 +11,12 @@ class Router {
     window.addEventListener('hashchange', () => {
       this.navigate(this.hash())
     })
+  }
+  use(cb) {
+    const exists = this.cbs.find(func => func.toString === cb.toString)
+    if (!exists) {
+      this.cbs.push(cb)
+    }
   }
   hash() {
     return window.location.hash
@@ -40,6 +47,7 @@ class Router {
     if (param !== null && param.indexOf('-') === -1) {
       return this.render.error('401', 'Check if painting ID is valid. All ID\'s consist of letters, numbers and hyphens.')
     }
+    this.cbs.forEach(cb => cb(hash, route))
     return this.render.template({ // if route is found, render correct component
       temp: route.temp(param),
       callback: route.callback
