@@ -17,8 +17,8 @@ const singleTemp = book => {
       : '',
     authors: book.authors.author
       ? (book.authors.author.length > 0
-        ? [book.authors['main-author']._text, ...book.authors.author.map(helper.formatAuthor)]
-        : [book.authors['main-author']._text])
+        ? [helper.formatAuthor(book.authors['main-author']._text), ...book.authors.author.map(helper.formatAuthor)]
+        : [helper.formatAuthor(book.authors['main-author']._text)])
       : [],
     publication: book.publication
      ? {
