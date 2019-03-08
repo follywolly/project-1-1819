@@ -18,6 +18,7 @@ Application build with a virtual DOM component system, explored in one of my rep
 [License](#License)
 
 ## 1. Live demo
+**Warning: due to the nature of the [oba-wrapper](https://github.com/maanlamp/OBA-wrapper), this project currently doesn't work in FireFox browsers**
 Site performs best on mobile. Check the demo [here](https://follywolly.github.io/project-1-1819/src/#/).
 
 ## 2. Install
